@@ -51,22 +51,24 @@ export default function Tasks() {
 
   return (
     <div className="tasks-tab">
-      <FormControl>
-        <InputLabel>Create Task</InputLabel>
-        <Input
-          value={input}
-          onChange={(event) => setInput(event.target.value)}
-        />
-        <Button
-          type="submit"
-          onClick={handleSubmit}
-          disabled={!input}
-          variant="contained"
-          color="primary"
-        >
-          Add Task
-        </Button>
-      </FormControl>
+      <form>
+        <FormControl onSubmit={handleSubmit}>
+          <InputLabel>Create Task</InputLabel>
+          <Input
+            value={input}
+            onChange={(event) => setInput(event.target.value)}
+          />
+          <Button
+            type="submit"
+            onClick={handleSubmit}
+            disabled={!input}
+            variant="contained"
+            color="primary"
+          >
+            Add Task
+          </Button>
+        </FormControl>
+      </form>
 
       <ul>
         {tasks.map((task, key) => (
