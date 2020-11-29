@@ -10,24 +10,32 @@ import {
 } from "@material-ui/core";
 import db from "../firebase";
 import { makeStyles } from "@material-ui/core/styles";
+import firebase from "firebase";
 
 export default function Tasks() {
   const [tasks, setTasks] = useState([]);
   const [input, setInput] = useState("");
-  console.log("Field: ", input);
+  // console.log("Field: ", input);
 
   const handleSubmit = (event) => {
     event.preventDefault();
 
-    setTasks([...tasks, input]);
+    db.collection("Tasks").add({
+      task: input,
+      // Allows adding a timestamp to each collection
+      timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+    });
+
     setInput("");
   };
 
   useEffect(() => {
-    db.collection("Tasks").onSnapshot((snapshot) => {
-      // setTasks variable will depend on the useState hook variable name
-      setTasks(snapshot.docs.map((doc) => doc.data().task));
-    });
+    db.collection("Tasks")
+      .orderBy("timestamp", "desc")
+      .onSnapshot((snapshot) => {
+        // setTasks variable will depend on the useState hook variable name
+        setTasks(snapshot.docs.map((doc) => doc.data().task));
+      });
   }, []);
 
   const useStyles = makeStyles((theme) => ({
@@ -41,7 +49,7 @@ export default function Tasks() {
 
   return (
     <div className="tasks-tab">
-      <FormControl onSubmit={handleSubmit}>
+      <FormControl>
         <InputLabel>Create Task</InputLabel>
         <Input
           value={input}
