@@ -3,4 +3,10 @@ Work flow is a web application that allows users to track/assign progress for di
 
 ## Technologies
 Database: Firebase
-Frontend: React, TypeScript
+Frontend: React, TypeScript, Material.UI
+
+## Notes
+* Use `npx create-react-app` to initialize React project
+* Use JSX to run dynamic JavaScript
+* `npm install @material-ui/core` for faster component design
+* `npm install typescript --save-dev` to use Typescript during development
