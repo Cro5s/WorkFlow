@@ -15,11 +15,3 @@ const firebaseApp = firebase.initializeApp({
 const db = firebaseApp.firestore();
 
 export default db;
-
-// Use this snippet inside a useEffect to query the database
-/* 
-  db.collection('Tasks').onSnapshot(snapshot => {
-    // setTasks variable will depend on the useState hook variable name
-    setTasks(snapshot.docs.map(doc => doc.data().task))
-  })
-*/
